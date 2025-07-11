@@ -2,4 +2,4 @@ repository:
   name: rosewd
   description: A rosewood fingerboard in your termnial
   homepage: https://crates.io/crates/rosewd
-  topics: rust, guitar, fretboard
+  topics: rust, guitar, fretboard, terminal
