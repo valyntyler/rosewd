@@ -2,6 +2,8 @@
 name = "rosewd"
 version = "0.1.0"
 edition = "2024"
+description = "A rosewood fingerboard in your termnial"
+license = "GPL-3.0"
 
 [dependencies]
 harmny = "0.1.0"
