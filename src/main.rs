@@ -1,6 +1,9 @@
 use color_eyre::Result;
-use crossterm::event::{self, Event};
-use ratatui::{DefaultTerminal, Frame};
+use crossterm::event;
+use crossterm::event::Event;
+use ratatui::DefaultTerminal;
+use ratatui::Frame;
+use ratatui::widgets::Paragraph;
 
 fn main() -> Result<()> {
     color_eyre::install()?;
@@ -20,5 +23,11 @@ fn run(mut terminal: DefaultTerminal) -> Result<()> {
 }
 
 fn render(frame: &mut Frame) {
-    frame.render_widget("hello world", frame.area());
+    let fretboard = Paragraph::new(
+        (0..6)
+            .map(|_| (0..22).map(|_| " ---|").collect::<String>() + "\n")
+            .collect::<String>(),
+    );
+
+    frame.render_widget(fretboard, frame.area());
 }
