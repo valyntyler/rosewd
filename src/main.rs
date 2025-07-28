@@ -17,14 +17,11 @@ fn main() -> Result<()> {
 fn run(mut terminal: DefaultTerminal) -> Result<()> {
     loop {
         terminal.draw(render)?;
-        if matches!(
-            event::read()?,
-            Event::Key(key_event) if (
-                key_event.code == KeyCode::Char('q') ||
-                key_event.code == KeyCode::Esc
-            )
-        ) {
-            break Ok(());
+        if let Event::Key(key_event) = event::read()? {
+            match key_event.code {
+                KeyCode::Char('q') | KeyCode::Esc => break Ok(()),
+                _ => (),
+            }
         }
     }
 }
