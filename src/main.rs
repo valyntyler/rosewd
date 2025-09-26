@@ -5,7 +5,9 @@ use crossterm::event::KeyCode;
 use ratatui::DefaultTerminal;
 use ratatui::Frame;
 use ratatui::layout::*;
+use ratatui::style::Stylize;
 use ratatui::widgets::Paragraph;
+use unicode_width::UnicodeWidthStr;
 
 fn main() -> Result<()> {
     color_eyre::install()?;
@@ -28,18 +30,24 @@ fn run(mut terminal: DefaultTerminal) -> Result<()> {
 }
 
 fn render(frame: &mut Frame) {
-    let fret = " ---|";
+    let fret = "────┨";
+
     let frets = 22;
     let strings = 6;
     let fretboard = Paragraph::new(
         (0..strings)
             .map(|_| (0..frets).map(|_| fret.to_owned()).collect::<String>() + "\n")
+            .map(|mut s| {
+                s.insert(0, '🯎');
+                s
+            })
             .collect::<String>(),
-    );
+    )
+    .gray();
 
     let area = center(
         frame.area(),
-        Constraint::Length(frets * fret.len() as u16),
+        Constraint::Length(frets * fret.width() as u16),
         Constraint::Length(strings),
     );
 
